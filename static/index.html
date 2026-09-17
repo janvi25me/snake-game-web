@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🐍 Cyber Snake Game - Python Full-Stack Edition</title>
+    <meta name="description" content="Play the classic 600x600 Python Turtle Snake Game reimagined as a modern high-performance web app with Python backend, global leaderboard, and sound FX.">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="app-header">
+        <div class="title-container">
+            <span class="logo-icon">🐍</span>
+            <h1>CYBER SNAKE</h1>
+            <span class="python-badge">Python Backend</span>
+        </div>
+        <p class="tagline">Classic 600x600 Grid • Real-time Leaderboard • Universal Web Deploy</p>
+    </header>
+
+    <!-- Main Game Layout -->
+    <main class="game-layout">
+        
+        <!-- Game Screen and Controls -->
+        <section class="game-wrapper">
+            
+            <!-- HUD / Top Status Bar -->
+            <div class="hud-bar">
+                <div class="score-box">
+                    <span class="score-label">Current Score</span>
+                    <span class="score-val" id="scoreDisplay">0</span>
+                </div>
+                <div>
+                    <span id="statusPill" class="status-pill live">PLAYING</span>
+                </div>
+                <div class="score-box" style="text-align: right;">
+                    <span class="score-label">Best Record</span>
+                    <span class="score-val highlight" id="highScoreDisplay">0</span>
+                </div>
+            </div>
+
+            <!-- 600x600 Scalable Game Canvas Area -->
+            <div class="canvas-container">
+                <canvas id="gameCanvas" width="600" height="600"></canvas>
+                
+                <!-- Game Over Modal Overlay -->
+                <div id="gameOverModal" class="modal-overlay hidden">
+                    <div class="modal-card">
+                        <h3>GAME OVER</h3>
+                        <p class="modal-score-summary">Score: <span id="finalScore">0</span></p>
+                        <p id="finalRank" style="color: #ffe600; margin-bottom: 1rem; font-weight: 600; font-size: 0.9rem;"></p>
+                        
+                        <input type="text" id="playerNameInput" class="input-field" placeholder="Enter player name" maxlength="15" value="Player1">
+                        
+                        <div class="modal-actions">
+                            <button id="submitScoreBtn" class="btn btn-primary" style="width: 100%;">Submit Score to Python API</button>
+                            <button id="playAgainBtn" class="btn" style="width: 100%;">Play Again (Space)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Control Toolbar -->
+            <div class="controls-bar">
+                <div class="btn-group">
+                    <button id="pauseBtn" class="btn">⏸ Pause</button>
+                    <button id="restartBtn" class="btn">🔄 Restart</button>
+                    <button id="muteBtn" class="btn">🔊 Sound ON</button>
+                </div>
+                
+                <select id="speedSelect" class="select-control" aria-label="Game Speed">
+                    <option value="easy">Speed: Chill</option>
+                    <option value="classic" selected>Speed: Classic (0.1s)</option>
+                    <option value="hard">Speed: Turbo</option>
+                    <option value="cyber">Speed: Cyber Insane</option>
+                </select>
+            </div>
+
+            <!-- Mobile Touch D-Pad -->
+            <div class="mobile-dpad">
+                <div class="dpad-row">
+                    <button class="dpad-btn" data-dir="Up" aria-label="Up">▲</button>
+                </div>
+                <div class="dpad-row">
+                    <button class="dpad-btn" data-dir="Left" aria-label="Left">◀</button>
+                    <button class="dpad-btn" data-dir="Down" aria-label="Down">▼</button>
+                    <button class="dpad-btn" data-dir="Right" aria-label="Right">▶</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Sidebar: Leaderboard & Game Controls -->
+        <aside class="sidebar">
+            
+            <!-- Global Leaderboard (Powered by Python Backend) -->
+            <div class="card">
+                <h2>🏆 Python Leaderboard</h2>
+                <ul id="leaderboardList" class="leaderboard-list">
+                    <li class="empty-entry">Loading top scores from Python backend...</li>
+                </ul>
+            </div>
+
+            <!-- Controls Info Card -->
+            <div class="card">
+                <h2>🎮 How to Play</h2>
+                <ul class="instructions-list">
+                    <li><span>Move Snake</span> <span class="key-badge">Arrows / WASD</span></li>
+                    <li><span>Pause / Resume</span> <span class="key-badge">Spacebar</span></li>
+                    <li><span>Quick Restart</span> <span class="key-badge">R Key</span></li>
+                    <li><span>Mobile / Tablet</span> <span class="key-badge">Swipe / D-Pad</span></li>
+                    <li><span>Grid Rules</span> <span class="key-badge">600x600 Bounds</span></li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Footer Status -->
+    <footer class="app-footer">
+        <div id="backendStatus">
+            <span class="dot online"></span> Checking Python Backend...
+        </div>
+        <span>•</span>
+        <span>Original Python Logic Reimagined</span>
+        <span>•</span>
+        <a href="https://github.com/janvi25me" target="_blank" rel="noopener" style="color: var(--primary-neon); text-decoration: none; font-weight: 600;">GitHub @janvi25me</a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/static/js/audio.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+[
+  {
+    "player": "Player1",
+    "score": 37,
+    "date": "2026-09-17",
+    "difficulty": "classic"
+  },
+  {
+    "player": "PythonPro",
+    "score": 25,
+    "date": "2026-09-17",
+    "difficulty": "Classic"
+  },
+  {
+    "player": "CyberViper",
+    "score": 18,
+    "date": "2026-09-17",
+    "difficulty": "Hard"
+  },
+  {
+    "player": "RetroGamer",
+    "score": 14,
+    "date": "2026-09-17",
+    "difficulty": "Classic"
+  },
+  {
+    "player": "NeonSnake",
+    "score": 10,
+    "date": "2026-09-17",
+    "difficulty": "Easy"
+  },
+  {
+    "player": "TurtleMaster",
+    "score": 8,
+    "date": "2026-09-17",
+    "difficulty": "Classic"
+  },
+  {
+    "player": "Player1",
+    "score": 2,
+    "date": "2026-09-17",
+    "difficulty": "classic"
+  },
+  {
+    "player": "Janvi",
+    "score": 0,
+    "date": "2026-09-17",
+    "difficulty": "classic"
+  },
+  {
+    "player": "Janvi",
+    "score": 0,
+    "date": "2026-09-17",
+    "difficulty": "classic"
+  }
+]
