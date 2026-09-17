@@ -24,8 +24,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import time
 # In-memory session store for server-validated game simulations
 active_games: Dict[str, SnakeEngine] = {}
+# Active player sessions timestamp for live online presence
+active_players: Dict[str, float] = {}
 
 class ScoreSubmission(BaseModel):
     player_name: str = Field(default="Player", max_length=20)
@@ -38,11 +41,38 @@ class DirectionChange(BaseModel):
 # API Routes
 @app.get("/api/health")
 def health_check():
+    now = time.time()
+    cutoff = now - 45
+    active_count = len([sid for sid, t in active_players.items() if t >= cutoff])
     return {
         "status": "online",
         "service": "Python Snake Game Engine",
         "version": "1.0.0",
-        "dimensions": "600x600"
+        "dimensions": "600x600",
+        "online_count": max(1, active_count)
+    }
+
+@app.post("/api/presence/ping")
+def presence_ping(session_id: Optional[str] = "player"):
+    now = time.time()
+    active_players[session_id] = now
+    # Clean up stale sessions older than 45s
+    cutoff = now - 45
+    stale = [sid for sid, t in active_players.items() if t < cutoff]
+    for sid in stale:
+        active_players.pop(sid, None)
+    return {
+        "status": "active",
+        "online_count": max(1, len(active_players))
+    }
+
+@app.get("/api/presence/count")
+def presence_count():
+    now = time.time()
+    cutoff = now - 45
+    active_count = len([sid for sid, t in active_players.items() if t >= cutoff])
+    return {
+        "online_count": max(1, active_count)
     }
 
 @app.get("/api/leaderboard")

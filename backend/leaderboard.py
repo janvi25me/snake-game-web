@@ -10,11 +10,11 @@ _lock = threading.Lock()
 def _load_data() -> List[Dict[str, Any]]:
     if not os.path.exists(DATA_FILE):
         default_data = [
-            {"player": "PythonPro", "score": 25, "date": "2026-09-17", "difficulty": "Classic"},
+            {"player": "ShadowViper", "score": 25, "date": "2026-09-17", "difficulty": "Classic"},
             {"player": "CyberViper", "score": 18, "date": "2026-09-17", "difficulty": "Hard"},
             {"player": "RetroGamer", "score": 14, "date": "2026-09-17", "difficulty": "Classic"},
             {"player": "NeonSnake", "score": 10, "date": "2026-09-17", "difficulty": "Easy"},
-            {"player": "TurtleMaster", "score": 8, "date": "2026-09-17", "difficulty": "Classic"}
+            {"player": "ApexHunter", "score": 8, "date": "2026-09-17", "difficulty": "Classic"}
         ]
         _save_data(default_data)
         return default_data

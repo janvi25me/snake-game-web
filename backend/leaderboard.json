@@ -1,15 +1,15 @@
 [
   {
-    "player": "Player1",
-    "score": 37,
-    "date": "2026-09-17",
-    "difficulty": "classic"
-  },
-  {
-    "player": "PythonPro",
-    "score": 25,
+    "player": "ShadowViper",
+    "score": 38,
     "date": "2026-09-17",
     "difficulty": "Classic"
+  },
+  {
+    "player": "ApexHunter",
+    "score": 27,
+    "date": "2026-09-17",
+    "difficulty": "Hard"
   },
   {
     "player": "CyberViper",
@@ -30,27 +30,9 @@
     "difficulty": "Easy"
   },
   {
-    "player": "TurtleMaster",
+    "player": "GhostRunner",
     "score": 8,
     "date": "2026-09-17",
     "difficulty": "Classic"
-  },
-  {
-    "player": "Player1",
-    "score": 2,
-    "date": "2026-09-17",
-    "difficulty": "classic"
-  },
-  {
-    "player": "Janvi",
-    "score": 0,
-    "date": "2026-09-17",
-    "difficulty": "classic"
-  },
-  {
-    "player": "Janvi",
-    "score": 0,
-    "date": "2026-09-17",
-    "difficulty": "classic"
   }
 ]

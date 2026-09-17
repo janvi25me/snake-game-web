@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🐍 Cyber Snake Game - Python Full-Stack Edition</title>
-    <meta name="description" content="Play the classic 600x600 Python Turtle Snake Game reimagined as a modern high-performance web app with Python backend, global leaderboard, and sound FX.">
+    <title>🐍 Cyber Snake - Retro Arcade Edition</title>
+    <meta name="description" content="Play the ultimate 600x600 Cyber Snake arcade game with real-time global leaderboard, sound FX, and speed modes.">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐍</text></svg>">
 </head>
@@ -15,9 +15,13 @@
         <div class="title-container">
             <span class="logo-icon">🐍</span>
             <h1>CYBER SNAKE</h1>
-            <span class="python-badge">Python Backend</span>
+            <span class="arcade-badge">Arcade Edition</span>
+            <div class="online-snakes-badge" id="onlineSnakesBadge" title="Live players slithering right now">
+                <span class="pulse-dot"></span>
+                <span id="onlineSnakesText"><strong id="onlineCount">1</strong> Online</span>
+            </div>
         </div>
-        <p class="tagline">Classic 600x600 Grid • Real-time Leaderboard • Universal Web Deploy</p>
+        <p class="tagline">Classic 600x600 Arena • Global Leaderboard • Multi-Speed Challenge</p>
     </header>
 
     <!-- Main Game Layout -->
@@ -55,7 +59,7 @@
                         <input type="text" id="playerNameInput" class="input-field" placeholder="Enter player name" maxlength="15" value="Player1">
                         
                         <div class="modal-actions">
-                            <button id="submitScoreBtn" class="btn btn-primary" style="width: 100%;">Submit Score to Python API</button>
+                            <button id="submitScoreBtn" class="btn btn-primary" style="width: 100%;">Submit Score</button>
                             <button id="playAgainBtn" class="btn" style="width: 100%;">Play Again (Space)</button>
                         </div>
                     </div>
@@ -72,7 +76,7 @@
                 
                 <select id="speedSelect" class="select-control" aria-label="Game Speed">
                     <option value="easy">Speed: Chill</option>
-                    <option value="classic" selected>Speed: Classic (0.1s)</option>
+                    <option value="classic" selected>Speed: Classic</option>
                     <option value="hard">Speed: Turbo</option>
                     <option value="cyber">Speed: Cyber Insane</option>
                 </select>
@@ -95,11 +99,11 @@
         <!-- Sidebar: Leaderboard & Game Controls -->
         <aside class="sidebar">
             
-            <!-- Global Leaderboard (Powered by Python Backend) -->
+            <!-- Global Leaderboard -->
             <div class="card">
-                <h2>🏆 Python Leaderboard</h2>
+                <h2>🏆 Global Leaderboard</h2>
                 <ul id="leaderboardList" class="leaderboard-list">
-                    <li class="empty-entry">Loading top scores from Python backend...</li>
+                    <li class="empty-entry">Loading top scores...</li>
                 </ul>
             </div>
 
@@ -111,7 +115,7 @@
                     <li><span>Pause / Resume</span> <span class="key-badge">Spacebar</span></li>
                     <li><span>Quick Restart</span> <span class="key-badge">R Key</span></li>
                     <li><span>Mobile / Tablet</span> <span class="key-badge">Swipe / D-Pad</span></li>
-                    <li><span>Grid Rules</span> <span class="key-badge">600x600 Bounds</span></li>
+                    <li><span>Grid Arena</span> <span class="key-badge">600x600 Bounds</span></li>
                 </ul>
             </div>
 
@@ -122,12 +126,12 @@
     <!-- Footer Status -->
     <footer class="app-footer">
         <div id="backendStatus">
-            <span class="dot online"></span> Checking Python Backend...
+            <span class="dot online"></span> Connecting to Server...
         </div>
         <span>•</span>
-        <span>Original Python Logic Reimagined</span>
+        <span>Retro Arcade Experience</span>
         <span>•</span>
-        <a href="https://github.com/janvi25me" target="_blank" rel="noopener" style="color: var(--primary-neon); text-decoration: none; font-weight: 600;">GitHub @janvi25me</a>
+        <span>60 FPS Sound & Audio FX</span>
     </footer>
 
     <!-- Scripts -->

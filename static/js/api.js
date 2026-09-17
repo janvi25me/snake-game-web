@@ -56,6 +56,31 @@ const API = {
         }
     },
 
+    getSessionId() {
+        let sid = sessionStorage.getItem("snake_session_id");
+        if (!sid) {
+            sid = "snake_" + Math.random().toString(36).substring(2, 9);
+            sessionStorage.setItem("snake_session_id", sid);
+        }
+        return sid;
+    },
+
+    async pingPresence() {
+        const sid = this.getSessionId();
+        try {
+            const baseUrl = this.getBaseUrl();
+            const res = await fetch(`${baseUrl}/api/presence/ping?session_id=${sid}`, {
+                method: "POST",
+                headers: { "Accept": "application/json" }
+            });
+            if (!res.ok) throw new Error(`Status: ${res.status}`);
+            return await res.json();
+        } catch (e) {
+            // Simulated dynamic active players fallback for offline/standalone mode
+            return { status: "local", online_count: 1 };
+        }
+    },
+
     async submitScore(playerName, score, difficulty = "Classic") {
         try {
             const baseUrl = this.getBaseUrl();

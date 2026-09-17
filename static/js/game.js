@@ -419,9 +419,9 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSpeed = SPEEDS[e.target.value] || SPEEDS["classic"];
     });
 
-    // Submit High Score to Python Backend
+    // Submit High Score
     submitScoreBtn.addEventListener("click", async () => {
-        const name = playerNameInput.value.trim() || "PythonPlayer";
+        const name = playerNameInput.value.trim() || "Player1";
         submitScoreBtn.disabled = true;
         submitScoreBtn.textContent = "Saving...";
 
@@ -472,12 +472,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const onlineCount = document.getElementById("onlineCount");
+
+    async function updatePresence() {
+        const res = await window.API.pingPresence();
+        if (res && res.online_count !== undefined && onlineCount) {
+            onlineCount.textContent = res.online_count;
+        }
+    }
+
     async function checkBackend() {
         const health = await window.API.checkHealth();
         if (health && health.status === "online") {
-            backendStatus.innerHTML = `<span class="dot online"></span> Python Backend Online (${health.dimensions})`;
+            backendStatus.innerHTML = `<span class="dot online"></span> Server Online`;
+            if (health.online_count && onlineCount) {
+                onlineCount.textContent = health.online_count;
+            }
         } else {
-            backendStatus.innerHTML = `<span class="dot offline"></span> Standalone Browser Mode`;
+            backendStatus.innerHTML = `<span class="dot offline"></span> Local Mode`;
         }
     }
 
@@ -486,6 +498,11 @@ document.addEventListener("DOMContentLoaded", () => {
         div.textContent = text;
         return div.innerHTML;
     }
+
+    // Live Presence Heartbeat & Auto-Polling
+    updatePresence();
+    setInterval(updatePresence, 12000);
+    setInterval(refreshLeaderboard, 20000);
 
     // Start
     initGame();
