@@ -1,24 +1,50 @@
-// API Bridge to Python Backend (FastAPI)
+// API Bridge to Python Backend (FastAPI / PythonAnywhere)
 const API = {
-    // Automatically detect backend URL (relative when same host, or fallback to window.location.origin)
+    // Default Python Backend URL for decoupled deployment (Vercel Frontend -> PythonAnywhere Backend)
+    // Replace with your actual PythonAnywhere username if different
+    DEFAULT_PYTHONANYWHERE_URL: "https://janvi25me.pythonanywhere.com",
+
     getBaseUrl() {
+        // 1. Check if user configured a custom backend URL in localStorage
+        const customUrl = localStorage.getItem("snake_backend_url");
+        if (customUrl) return customUrl.replace(/\/$/, "");
+
+        // 2. If running on Vercel, connect to PythonAnywhere backend
+        if (window.location.hostname.includes("vercel.app")) {
+            return this.DEFAULT_PYTHONANYWHERE_URL;
+        }
+
+        // 3. Otherwise (Localhost or PythonAnywhere unified hosting), use origin
         return window.location.origin;
+    },
+
+    setCustomBackendUrl(url) {
+        if (!url || url.trim() === "") {
+            localStorage.removeItem("snake_backend_url");
+        } else {
+            localStorage.setItem("snake_backend_url", url.trim().replace(/\/$/, ""));
+        }
     },
 
     async checkHealth() {
         try {
-            const res = await fetch(`${this.getBaseUrl()}/api/health`);
-            if (!res.ok) throw new Error("Health check failed");
+            const baseUrl = this.getBaseUrl();
+            const res = await fetch(`${baseUrl}/api/health`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (!res.ok) throw new Error(`Status: ${res.status}`);
             return await res.json();
         } catch (e) {
-            console.warn("Python backend health check offline or CORS:", e.message);
+            console.warn("Python backend health check warning:", e.message);
             return null;
         }
     },
 
     async fetchLeaderboard() {
         try {
-            const res = await fetch(`${this.getBaseUrl()}/api/leaderboard?limit=10`);
+            const baseUrl = this.getBaseUrl();
+            const res = await fetch(`${baseUrl}/api/leaderboard?limit=10`);
             if (!res.ok) throw new Error("Failed to fetch leaderboard");
             return await res.json();
         } catch (e) {
@@ -32,7 +58,8 @@ const API = {
 
     async submitScore(playerName, score, difficulty = "Classic") {
         try {
-            const res = await fetch(`${this.getBaseUrl()}/api/leaderboard/submit`, {
+            const baseUrl = this.getBaseUrl();
+            const res = await fetch(`${baseUrl}/api/leaderboard/submit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -44,7 +71,7 @@ const API = {
             if (!res.ok) throw new Error("Score submission error");
             return await res.json();
         } catch (e) {
-            console.warn("Saved score locally:", e.message);
+            console.warn("Saved score locally fallback:", e.message);
             return {
                 entry: { player: playerName || "Player", score: score, date: "Today", difficulty: difficulty },
                 rank: 1,
