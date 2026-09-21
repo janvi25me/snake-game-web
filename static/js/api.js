@@ -2,7 +2,7 @@
 const API = {
     // Default Python Backend URL for decoupled deployment (Vercel Frontend -> PythonAnywhere Backend)
     // Replace with your actual PythonAnywhere username if different
-    DEFAULT_PYTHONANYWHERE_URL: "https://janvi25me.pythonanywhere.com",
+    DEFAULT_PYTHONANYWHERE_URL: "https://janvi.pythonanywhere.com",
 
     getBaseUrl() {
         // 1. Check if user configured a custom backend URL in localStorage

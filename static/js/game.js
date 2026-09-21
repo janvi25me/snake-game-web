@@ -51,6 +51,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     highScoreElement.textContent = highScore;
 
+    // 20 Short & Sweet Game Over Tips
+    const GAME_OVER_TIPS = [
+        "⚡ Shake it off! Try again.",
+        "🐍 Watch that sneaky tail!",
+        "🎯 Keep calm & steer on.",
+        "🔥 Almost had it! Next run?",
+        "💡 Pro tip: Hug the walls!",
+        "🕹️ Warm-up over. Time to win!",
+        "🚀 Reflexes are leveling up!",
+        "💥 Watch the corners!",
+        "🏆 You've got this, champion!",
+        "✨ One more round for glory!",
+        "⚡ Smooth turns win runs.",
+        "🧠 Think two turns ahead.",
+        "🎮 Press Space to bounce back!",
+        "🌟 Practice makes legend.",
+        "🐍 Strike with precision!",
+        "🍕 Don't get greedy for food!",
+        "🔥 Great rhythm, go again!",
+        "👑 The leaderboard is calling!",
+        "🎪 Leave room to escape.",
+        "🚀 Best run loading next..."
+    ];
+
+    function getRandomTip() {
+        return GAME_OVER_TIPS[Math.floor(Math.random() * GAME_OVER_TIPS.length)];
+    }
+
+
+    function getRandomTip() {
+        return GAME_OVER_TIPS[Math.floor(Math.random() * GAME_OVER_TIPS.length)];
+    }
+
+
     // Initialize Game
     function initGame() {
         // Python Turtle starting positions: [(0, 0), (-20, 0), (-40, 0)] mapped to canvas coords
