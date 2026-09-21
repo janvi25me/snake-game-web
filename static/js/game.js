@@ -206,9 +206,18 @@ document.addEventListener("DOMContentLoaded", () => {
         window.soundFX.playGameOver();
 
         finalScore.textContent = score;
-        finalRank.textContent = score >= highScore && score > 0 ? "🎉 NEW HIGH SCORE!" : "Keep practicing!";
+
+        // Show celebration for new high score, otherwise pick a random tip
+        if (score >= highScore && score > 0) {
+            finalRank.textContent = "🎉 NEW HIGH SCORE! Outstanding run!";
+        } else {
+            finalRank.textContent = getRandomTip();
+        }
+
         gameOverModal.classList.remove("hidden");
+        if (playerNameInput) playerNameInput.blur();
     }
+
 
     // Render Canvas
     function draw() {
@@ -382,7 +391,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 setDirection("Right");
                 break;
             case "Space":
-                togglePause();
+                if (isGameOver) {
+                    initGame();
+                } else {
+                    togglePause();
+                }
                 break;
             case "KeyR":
                 initGame();
